@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "org/polyfrost/example/mixin/MinecraftMixin": {
+      "startGame": "Lnet/minecraft/client/Minecraft;func_71384_a()V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "org/polyfrost/example/mixin/MinecraftMixin": {
+        "startGame": "Lnet/minecraft/client/Minecraft;func_71384_a()V"
+      }
+    }
+  }
+}
