@@ -29,7 +29,7 @@ public class DungeonsStuff {
     TestConfig config = TestConfig.getInstance();
     Random random = new Random();
 
-    private boolean shouldCheckForOpenGui = false;
+    private boolean requeueGuiIsOpen = false;
 
     private final Minecraft mc = Minecraft.getMinecraft();
 
@@ -40,7 +40,7 @@ public class DungeonsStuff {
 
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public void onGuiOpen(GuiOpenEvent event) {
-        if(shouldCheckForOpenGui)
+        if(requeueGuiIsOpen)
         {
             if (event.gui instanceof GuiContainer) {
                 GuiContainer gui = (GuiContainer) event.gui;
@@ -53,18 +53,18 @@ public class DungeonsStuff {
     }
 
     private void clickSlot13(GuiContainer gui) {
-        //check if slot 13 exists
-        Slot slot13 = gui.inventorySlots.getSlot(14);
-        if (slot13 != null && slot13.getHasStack()) {
-            String itemName = slot13.getStack().getDisplayName().trim();
-            if (!itemName.isEmpty()) {
-                // simulate clicking on slot 13
-                scheduler.schedule(() -> {
-                    mc.playerController.windowClick(gui.inventorySlots.windowId, 13, 0, 0, mc.thePlayer); // Klick auf Slot 14
-                }, 1000 + requeue_timer_randomness, TimeUnit.MILLISECONDS);
-                shouldCheckForOpenGui = false;
-            }
-        }
+        // Simuliere einen Klick auf Slot 13 nach 1 Sekunde
+        scheduler.schedule(() -> {
+            Minecraft.getMinecraft().playerController.windowClick(
+                    gui.inventorySlots.windowId, // Fenster-ID des Inventars
+                    13,                          // Slot 13
+                    0,                           // Maustaste 0 (Linksklick)
+                    0,                           // Klick-Typ 0 (Pickup)
+                    Minecraft.getMinecraft().thePlayer // Spieler, der den Klick ausführt
+            );
+        }, 1000, TimeUnit.MILLISECONDS);
+
+        requeueGuiIsOpen = false;
     }
 
     // Chat event listener for re-queueing based on messages
@@ -92,7 +92,7 @@ public class DungeonsStuff {
                 scheduler.schedule(() -> {
                     if (Minecraft.getMinecraft().thePlayer != null) {
                         Minecraft.getMinecraft().thePlayer.sendChatMessage("/joininstance catacombs_floor_" + floorString);
-                        shouldCheckForOpenGui = true;
+                        requeueGuiIsOpen = true;
                     }
                 }, totalDelay, TimeUnit.MILLISECONDS);
             }
