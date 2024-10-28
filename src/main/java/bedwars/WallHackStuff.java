@@ -1,6 +1,5 @@
 package bedwars;
 
-import DiscordStuff.SendDiscordName;
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import net.minecraft.block.BlockBed;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -65,7 +64,6 @@ public class WallHackStuff {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new SendDiscordName());
     }
 
     @SubscribeEvent
