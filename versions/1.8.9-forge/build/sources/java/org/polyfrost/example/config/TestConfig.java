@@ -84,10 +84,10 @@ public class TestConfig extends Config {
         @Switch(name = "Auto requeue", category = Dungeons, subcategory = "Auto requeue")
         public boolean requeue = true;
 
-        @Number(name = "Auto requeue (in s)", category = Dungeons, subcategory = "Auto requeue", min = 1, max = 90)
+        @Number(name = "Auto requeue (in ms)", category = Dungeons, subcategory = "Auto requeue", min = 0, max = 10000)
         public int requeue_timer;
 
-        @Number(name = "Auto requeue randomnis (in ms)", category = Dungeons, subcategory = "Auto requeue", min = 250, max = 5000)
+        @Number(name = "Auto requeue randomnis (in ms)", category = Dungeons, subcategory = "Auto requeue", min = 0, max = 5000)
         public int requeue_timer_randomnis;
 
         @Dropdown(name = "Floor", category = Dungeons, subcategory = "Auto requeue", options = {"1", "2", "3", "4", "5", "6", "7"})

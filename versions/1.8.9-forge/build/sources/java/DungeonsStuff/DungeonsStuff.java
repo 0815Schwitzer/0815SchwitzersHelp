@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.polyfrost.example.config.TestConfig;
+import util.Chat;
 
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -35,6 +36,8 @@ public class DungeonsStuff {
     private boolean requeueGuiIsOpen = false;
     private boolean awaitingPartyListResponse = false;
     private final Minecraft mc = Minecraft.getMinecraft();
+
+    Chat chat = new Chat();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -119,10 +122,14 @@ public class DungeonsStuff {
                     if (currentPartySize >= 5) {
                         requeueIntoFloorWithDelay();
                     } else {
-                        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Party not full. Requeue aborted."));
+                        scheduler.schedule(() -> {
+                            chat.FormatedChatMessage("Party not full not requeing");
+                        }, 1000, TimeUnit.MILLISECONDS);
                     }
                 } catch (NumberFormatException e) {
-                    Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Failed to read party size. Requeue aborted."));
+                    scheduler.schedule(() -> {
+                        chat.FormatedChatMessage("Failed to read party size. Requeue aborted");
+                    }, 1000, TimeUnit.MILLISECONDS);
                 }
             }
             return;
@@ -139,7 +146,7 @@ public class DungeonsStuff {
 
         // Set delay with randomness
         random_time = 100 + random.nextInt(Math.max(1, requeue_timer_randomness - 100));
-        int totalDelay = requeue_timer * 1000 + random_time;
+        int totalDelay = requeue_timer + random_time;
 
         scheduler.schedule(() -> {
             if (Minecraft.getMinecraft().thePlayer != null) {
