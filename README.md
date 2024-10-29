@@ -1,22 +1,27 @@
-# OneConfigExampleMod
+<h1>0815SchwitzersHelp</h1>
 
-![Powered by OneConfig](https://polyfrost.org/media/branding/badges/badge_1.svg)
-![Compact Powered by OneConfig](https://polyfrost.org/media/branding/badges/badge_2.svg)
-![Minimal Powered by OneConfig](https://polyfrost.org/media/branding/badges/badge_3.svg)
-![Minimal Compact Powered by OneConfig](https://polyfrost.org/media/branding/badges/badge_4.svg)
+<h2>Features</h2>
 
-Example mod implementing OneConfig.
+<h3>Bedwars</h3>
 
-## How to use
+<ul>
+    <li>Player ESP</li>
+    <li>Bed ESP</li>
+<ul>
 
-- Copy the template either by using GitHub's "Use this template" feature or downloading the repo manually.
-- **Remove the license named "LICENSE-TEMPLATE" and choose a new one.**
-- Refactor the template (specifically, the modid, version and name in the gradle.properties and most of the class names)
-  to a different name.
-- Have fun modding! :D
+<li>Bed Protection ESP (shows if enemies have placed obsidian near their bed)</li>
 
-## Need to update to a newer commit of this template?
+</ul>
+    <li>Customizable colors for all the options above</li>
+</ul>
 
-Check out these update guides:
-- [Updating to commit `fd8e095`](update-to-fd8e095.md) (most recent update)
-- [Updating to commit `301a6ca`](update-to-301a6ca.md)
+<h3>Dungeons</h3>
+
+<ul>
+    <li>Key Mob ESP</li>
+    <li>Auto requeue after the dungeon is over</li>
+    <ul>
+        <li>Set a requeue time with an additional random delay</li> 
+        <li>Toggle to check if the party is full before requeueing</li> 
+    </ul> 
+</ul>
