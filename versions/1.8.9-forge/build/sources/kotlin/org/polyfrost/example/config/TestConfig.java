@@ -93,6 +93,9 @@ public class TestConfig extends Config {
         @Dropdown(name = "Floor", category = Dungeons, subcategory = "Auto requeue", options = {"1", "2", "3", "4", "5", "6", "7"})
         public int floorString;
 
+        @Switch(name = "Check for full Party", category = Dungeons, subcategory = "Auto requeue")
+        public boolean ckeckPartySize = true;
+
 
 
 
@@ -179,7 +182,12 @@ public class TestConfig extends Config {
     }
 
     public int getFloor() {
-        return floorString; // Wandle die String-Auswahl in Integer um
+        return floorString;
+    }
+
+    public boolean getCheckPartySize()
+    {
+        return ckeckPartySize;
     }
 
 
